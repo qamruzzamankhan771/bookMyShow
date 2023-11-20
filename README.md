@@ -1,36 +1,36 @@
-# bookMyShow
+# Book My Show App Clone Database
 
-# Table of Contents
-Introduction
-Prerequisites
-Entities with Attributes
-Users
-Theaters
-Movies
-Languages
-Movie Casts
-Theater Movies
-Theater Seats
-Seats Category Prices
-Tickets
-SQL Queries
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Prerequisites](#prerequisites)
+3. [Entities with Attributes](#entities-with-attributes)
+   1. [Users](#users)
+   2. [Theaters](#theaters)
+   3. [Movies](#movies)
+   4. [Languages](#languages)
+   5. [Movie Casts](#movie-casts)
+   6. [Theater Movies](#theater-movies)
+   7. [Theater Seats](#theater-seats)
+   8. [Seats Category Prices](#seats-category-prices)
+   9. [Tickets](#tickets)
+4. [SQL Queries](#sql-queries)
+   1. [Create Database](#create-database)
+   2. [Create Tables](#create-tables)
+   3. [Insert Sample Data](#insert-sample-data)
+   4. [List Shows on a Given Date at a Given Theater](#list-shows)
+5. [Conclusion](#conclusion)
 
-
-Introduction<a name="introduction"></a>
+## Introduction<a name="introduction"></a>
 This document outlines the database model for a Book My Show app clone. The database is designed to manage user information, theaters, movies, languages, movie casts, theater movies, theater seats, seat category prices, and tickets.
 
-Prerequisites<a name="prerequisites"></a>
+## Prerequisites<a name="prerequisites"></a>
 Before setting up the database, ensure the following prerequisites are met:
+- MySQL database installed.
+- DBeaver or MySQL Workbench for database access.
 
-MySQL database installed.
-DBeaver or MySQL Workbench for database access.
+## Entities with Attributes<a name="entities-with-attributes"></a>
 
-
-
-Entities with Attributes<a name="entities-with-attributes"></a>
-## Entities with Attributes
-
-### Users
+### Users<a name="users"></a>
 | Field       | Type           | Constraints                                  |
 |-------------|----------------|----------------------------------------------|
 | userId      | Integer        | Primary Key, Auto Increment, Not Null        |
@@ -38,14 +38,14 @@ Entities with Attributes<a name="entities-with-attributes"></a>
 | phoneNumber | Varchar(255)   | Not Null                                     |
 | email       | Varchar(255)   | Not Null                                     |
 
-### Theaters
+### Theaters<a name="theaters"></a>
 | Field       | Type           | Constraints                                  |
 |-------------|----------------|----------------------------------------------|
 | theaterId   | Integer        | Primary Key, Auto Increment, Not Null        |
 | theaterName | Varchar(255)   | Not Null                                     |
 | address     | Varchar(255)   | Not Null                                     |
 
-### Movies
+### Movies<a name="movies"></a>
 | Field       | Type           | Constraints                                  |
 |-------------|----------------|----------------------------------------------|
 | movieId     | Integer        | Primary Key, Auto Increment, Not Null        |
@@ -54,14 +54,14 @@ Entities with Attributes<a name="entities-with-attributes"></a>
 | storyLine   | Varchar(255)   |                                              |
 | genre       | Varchar(255)   |                                              |
 
-### Languages
+### Languages<a name="languages"></a>
 | Field       | Type           | Constraints                                  |
 |-------------|----------------|----------------------------------------------|
 | languageId  | Integer        | Primary Key, Auto Increment, Not Null        |
 | movieId     | Integer        | Foreign Key, Not Null                        |
 | languageName| Varchar(255)   | Not Null                                     |
 
-### Movie Casts
+### Movie Casts<a name="movie-casts"></a>
 | Field       | Type           | Constraints                                  |
 |-------------|----------------|----------------------------------------------|
 | id          | Integer        | Primary Key, Auto Increment, Not Null        |
@@ -69,7 +69,7 @@ Entities with Attributes<a name="entities-with-attributes"></a>
 | name        | Varchar(255)   | Not Null                                     |
 | roleName    | Varchar(255)   | Not Null                                     |
 
-### Theater Movies
+### Theater Movies<a name="theater-movies"></a>
 | Field       | Type           | Constraints                                  |
 |-------------|----------------|----------------------------------------------|
 | id          | Integer        | Primary Key, Auto Increment, Not Null        |
@@ -80,7 +80,7 @@ Entities with Attributes<a name="entities-with-attributes"></a>
 | tillDate    | DateTime       | Not Null                                     |
 | showtime    | DateTime       | Not Null                                     |
 
-### Theater Seats
+### Theater Seats<a name="theater-seats"></a>
 | Field       | Type           | Constraints                                  |
 |-------------|----------------|----------------------------------------------|
 | id          | Integer        | Primary Key, Auto Increment, Not Null        |
@@ -88,7 +88,7 @@ Entities with Attributes<a name="entities-with-attributes"></a>
 | seatNo      | Varchar(255)   | Not Null                                     |
 | isActive    | Boolean        | Not Null                                     |
 
-### Seats Category Prices
+### Seats Category Prices<a name="seats-category-prices"></a>
 | Field       | Type           | Constraints                                  |
 |-------------|----------------|----------------------------------------------|
 | id          | Integer        | Primary Key, Auto Increment, Not Null        |
@@ -96,7 +96,7 @@ Entities with Attributes<a name="entities-with-attributes"></a>
 | name        | Varchar(255)   | Not Null                                     |
 | price       | Integer        | Not Null                                     |
 
-### Tickets
+### Tickets<a name="tickets"></a>
 | Field       | Type           | Constraints                                  |
 |-------------|----------------|----------------------------------------------|
 | ticketId    | Integer        | Primary Key, Auto Increment, Not Null        |
@@ -108,18 +108,14 @@ Entities with Attributes<a name="entities-with-attributes"></a>
 | validFrom   | DateTime       | Not Null                                     |
 | validTill   | DateTime       | Not Null                                     |
 
+## SQL Queries<a name="sql-queries"></a>
 
-SQL Queries<a name="-queries"></a>
-
-Create Database
-
+### Create Database<a name="create-database"></a>
+```sql
 CREATE DATABASE IF NOT EXISTS bookMyShow;
 USE bookMyShow;
 
-
-Create Tables
-
-Users
+### Create Tables
 
 CREATE TABLE Users (
     userId INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -128,15 +124,12 @@ CREATE TABLE Users (
     email VARCHAR(255) NOT NULL
 );
 
-Theaters
-
 CREATE TABLE Theaters (
     theaterId INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     theaterName VARCHAR(255) NOT NULL,
     address VARCHAR(255) NOT NULL
 );
 
-Movies
 
 CREATE TABLE Movies (
     movieId INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -146,7 +139,6 @@ CREATE TABLE Movies (
     genre VARCHAR(255)
 );
 
-Languages
 
 CREATE TABLE Languages (
     languageId INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -155,7 +147,6 @@ CREATE TABLE Languages (
     FOREIGN KEY (movieId) REFERENCES Movies(movieId)
 );
 
-Movie Casts
 
 CREATE TABLE MovieCasts (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -165,7 +156,6 @@ CREATE TABLE MovieCasts (
     FOREIGN KEY (movieId) REFERENCES Movies(movieId)
 );
 
-Theater Movies
 
 CREATE TABLE TheaterMovies (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -180,7 +170,6 @@ CREATE TABLE TheaterMovies (
     FOREIGN KEY (languageId) REFERENCES Languages(languageId)
 );
 
-Theater Seats
 
 CREATE TABLE TheaterSeats (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -190,7 +179,6 @@ CREATE TABLE TheaterSeats (
     FOREIGN KEY (theaterId) REFERENCES Theaters(theaterId)
 );
 
-Seats Category Prices
 
 CREATE TABLE SeatsCategoryPrices (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -200,7 +188,6 @@ CREATE TABLE SeatsCategoryPrices (
     FOREIGN KEY (theaterId) REFERENCES Theaters(theaterId)
 );
 
-Tickets
 
 CREATE TABLE Tickets (
     ticketId INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -216,7 +203,8 @@ CREATE TABLE Tickets (
     FOREIGN KEY (seatCategoryId) REFERENCES SeatsCategoryPrices(id)
 );
 
-Insert Sample Data
+
+### Insert Sample Data
 
 -- Insert sample data into Users table
 INSERT INTO Users (userName, phoneNumber, email) VALUES
@@ -267,10 +255,7 @@ INSERT INTO Tickets (theaterMovieId, userId, seatCategoryId, seatNo, code, valid
 
 
 
-
--- query to list down all the shows on a given date at a given theatre along with their respective show timings
-
-
+### List Shows on a Given Date at a Given Theater<a name="list-shows"></a>
 SELECT
     t.theaterName,
     m.movieName,
@@ -285,5 +270,5 @@ JOIN
 JOIN
     Movies m ON tm.moviesId = m.movieId
 WHERE
-    tm.theaterId = :theaterId
-    AND DATE(tm.showtime) = '2023-01-01';
+    tm.theaterId = :theaterId -- Replace :theaterId with the specific theaterId
+    AND DATE(tm.showtime) = '2023-01-01'; -- Replace '2023-01-01' with the specific date
