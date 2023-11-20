@@ -28,83 +28,85 @@ DBeaver or MySQL Workbench for database access.
 
 
 Entities with Attributes<a name="entities-with-attributes"></a>
+## Entities with Attributes
 
-Users<a name="users"></a>
-Field	Type	Constraints
-userId	Integer	Primary Key, Auto Increment, Not Null
-userName	Varchar(255)	Not Null
-phoneNumber	Varchar(255)	Not Null
-email	Varchar(255)	Not Null
+### Users
+| Field       | Type           | Constraints                                  |
+|-------------|----------------|----------------------------------------------|
+| userId      | Integer        | Primary Key, Auto Increment, Not Null        |
+| userName    | Varchar(255)   | Not Null                                     |
+| phoneNumber | Varchar(255)   | Not Null                                     |
+| email       | Varchar(255)   | Not Null                                     |
 
+### Theaters
+| Field       | Type           | Constraints                                  |
+|-------------|----------------|----------------------------------------------|
+| theaterId   | Integer        | Primary Key, Auto Increment, Not Null        |
+| theaterName | Varchar(255)   | Not Null                                     |
+| address     | Varchar(255)   | Not Null                                     |
 
-Theaters<a name="theaters"></a>
-Field	Type	Constraints
-theaterId	Integer	Primary Key, Auto Increment, Not Null
-theaterName	Varchar(255)	Not Null
-address	Varchar(255)	Not Null
+### Movies
+| Field       | Type           | Constraints                                  |
+|-------------|----------------|----------------------------------------------|
+| movieId     | Integer        | Primary Key, Auto Increment, Not Null        |
+| movieName   | Varchar(255)   | Not Null                                     |
+| ratings     | Integer        |                                              |
+| storyLine   | Varchar(255)   |                                              |
+| genre       | Varchar(255)   |                                              |
 
+### Languages
+| Field       | Type           | Constraints                                  |
+|-------------|----------------|----------------------------------------------|
+| languageId  | Integer        | Primary Key, Auto Increment, Not Null        |
+| movieId     | Integer        | Foreign Key, Not Null                        |
+| languageName| Varchar(255)   | Not Null                                     |
 
-Movies<a name="movies"></a>
-Field	Type	Constraints
-movieId	Integer	Primary Key, Auto Increment, Not Null
-movieName	Varchar(255)	Not Null
-ratings	Integer	
-storyLine	Varchar(255)	
-genre	Varchar(255)	
+### Movie Casts
+| Field       | Type           | Constraints                                  |
+|-------------|----------------|----------------------------------------------|
+| id          | Integer        | Primary Key, Auto Increment, Not Null        |
+| movieId     | Integer        | Foreign Key, Not Null                        |
+| name        | Varchar(255)   | Not Null                                     |
+| roleName    | Varchar(255)   | Not Null                                     |
 
+### Theater Movies
+| Field       | Type           | Constraints                                  |
+|-------------|----------------|----------------------------------------------|
+| id          | Integer        | Primary Key, Auto Increment, Not Null        |
+| theaterId   | Integer        | Foreign Key, Not Null                        |
+| moviesId    | Integer        | Foreign Key, Not Null                        |
+| languageId  | Integer        | Foreign Key, Not Null                        |
+| fromDate    | DateTime       | Not Null                                     |
+| tillDate    | DateTime       | Not Null                                     |
+| showtime    | DateTime       | Not Null                                     |
 
-Languages<a name="languages"></a>
-Field	Type	Constraints
-languageId	Integer	Primary Key, Auto Increment, Not Null
-movieId	Integer	Foreign Key, Not Null
-languageName	Varchar(255)	Not Null
+### Theater Seats
+| Field       | Type           | Constraints                                  |
+|-------------|----------------|----------------------------------------------|
+| id          | Integer        | Primary Key, Auto Increment, Not Null        |
+| theaterId   | Integer        | Foreign Key, Not Null                        |
+| seatNo      | Varchar(255)   | Not Null                                     |
+| isActive    | Boolean        | Not Null                                     |
 
+### Seats Category Prices
+| Field       | Type           | Constraints                                  |
+|-------------|----------------|----------------------------------------------|
+| id          | Integer        | Primary Key, Auto Increment, Not Null        |
+| theaterId   | Integer        | Foreign Key, Not Null                        |
+| name        | Varchar(255)   | Not Null                                     |
+| price       | Integer        | Not Null                                     |
 
-Movie Casts<a name="movie-casts"></a>
-Field	Type	Constraints
-id	Integer	Primary Key, Auto Increment, Not Null
-movieId	Integer	Foreign Key, Not Null
-name	Varchar(255)	Not Null
-roleName	Varchar(255)	Not Null
-
-
-Theater Movies<a name="theater-movies"></a>
-Field	Type	Constraints
-id	Integer	Primary Key, Auto Increment, Not Null
-theaterId	Integer	Foreign Key, Not Null
-moviesId	Integer	Foreign Key, Not Null
-languageId	Integer	Foreign Key, Not Null
-fromDate	DateTime	Not Null
-tillDate	DateTime	Not Null
-showtime	DateTime	Not Null
-
-
-Theater Seats<a name="theater-seats"></a>
-Field	Type	Constraints
-id	Integer	Primary Key, Auto Increment, Not Null
-theaterId	Integer	Foreign Key, Not Null
-seatNo	Varchar(255)	Not Null
-isActive	Boolean	Not Null
-
-
-Seats Category Prices<a name="seats-category-prices"></a>
-Field	Type	Constraints
-id	Integer	Primary Key, Auto Increment, Not Null
-theaterId	Integer	Foreign Key, Not Null
-name	Varchar(255)	Not Null
-price	Integer	Not Null
-
-
-Tickets<a name="tickets"></a>
-Field	Type	Constraints
-ticketId	Integer	Primary Key, Auto Increment, Not Null
-theaterMovieId	Integer	Foreign Key, Not Null
-userId	Integer	Foreign Key, Not Null
-seatCategoryId	Integer	Foreign Key, Not Null
-seatNo	Integer	Not Null
-code	DateTime	Not Null
-validFrom	DateTime	Not Null
-validTill	DateTime	Not Null
+### Tickets
+| Field       | Type           | Constraints                                  |
+|-------------|----------------|----------------------------------------------|
+| ticketId    | Integer        | Primary Key, Auto Increment, Not Null        |
+| theaterMovieId| Integer      | Foreign Key, Not Null                        |
+| userId      | Integer        | Foreign Key, Not Null                        |
+| seatCategoryId| Integer       | Foreign Key, Not Null                        |
+| seatNo      | Integer        | Not Null                                     |
+| code        | DateTime       | Not Null                                     |
+| validFrom   | DateTime       | Not Null                                     |
+| validTill   | DateTime       | Not Null                                     |
 
 
 SQL Queries<a name="-queries"></a>
